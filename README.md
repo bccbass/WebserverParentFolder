@@ -3,6 +3,11 @@
 ## README.md
 </br>
 
+![Record Store by Mick Haupt](./docs/mick-haupt-CbNBjnXXhNg-unsplash.jpg)
+##### *Photo by Mick Haupt (unsplash)*  
+
+</br>
+
 ### **Contents:**
 1. [Project Purpose](#Project-Purpose-(R1,-R2))
 1. [Why PostgreSQL (R3)](#Why-PostgreSQL-(R3))
@@ -11,7 +16,7 @@
 ### ***Links:***
 
 - #### [Github Repository](https://github.com/bccbass/PersonnelAPI)
-- #### [Trello Project Management](https://trello.com/b/VWm2omOk/personnel-api)
+- #### [Trello Project Management](https://trello.com/invite/b/VWm2omOk/ATTI837dd0d277594dd006695995cdfdac5787BC1FFE/personnel-api)
 - #### [API Endpoints](./API-Endpoints.md)
 
 </br>
