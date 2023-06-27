@@ -3,6 +3,11 @@
 ## README.md
 </br>
 
+### **Contents:**
+1. [Project Purpose](#Project-Purpose-(R1,-R2))
+1. [Why PostgreSQL (R3)](#Why-PostgreSQL-(R3))
+1. [Endpoints (R5)](#Endpoints-(R5))
+
 ### ***Links:***
 
 - #### [Github Repository](https://github.com/bccbass/PersonnelAPI)
@@ -37,6 +42,7 @@ PostgreSQL is an extremely popular and relational database management system tha
 </br>  
 
 ### **ERD (R6)**
+![Personnel ERD](./docs/Personnel_ERD.jpg)
 
 
 </br>  
