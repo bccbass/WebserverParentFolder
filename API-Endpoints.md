@@ -8,7 +8,7 @@ All endpoints require an account and for the user to be logged in with an active
 1. [Artist](#Artist)
 1. [Track](#Track)
 1. [Musician](#Musician)
-1. [Credit (track_musician)](#Credit-(track_musician))
+1. [Credit (track_musician)](#Credit)
 1. [Instrument](#Instrument)
 
 ## Authentication
