@@ -303,7 +303,7 @@ Deletes a musician from the database.
 <hr>
 
 
-## Credit (track_musician)
+## <a name="Credit"></a>Credit (track_musician)
 
 Credits represents the association between musicians and tracks. They are simple join records so the only provided routes are creation and deletion. 
 
