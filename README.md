@@ -62,7 +62,7 @@ PostgreSQL is an extremely popular and relational database management system tha
 
 
 - [**Flask**](https://flask.palletsprojects.com/en/2.3.x/)  
-    Flask is a lightweight Python web framework implemented primarily to handle HTTP routing.  
+    Flask is a lightweight Python web framework implemented primarily to handle HTTP request/response cycles and routing.   
 
       
 
