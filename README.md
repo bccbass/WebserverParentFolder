@@ -9,9 +9,16 @@
 </br>
 
 ### **Contents:**
+1. [Quickstart](#Quickstart)
 1. [Project Purpose](#Project-Purpose-(R1,-R2))
 1. [Why PostgreSQL (R3)](#Why-PostgreSQL-(R3))
+1. [ORM: Benefits and functionality (R4)](#ORM:-Benefits-and-functionality-(R4))
 1. [Endpoints (R5)](#Endpoints-(R5))
+1. [ERD (R6)](#ERD-(R6))
+1. [Third Party Services (R7)](#Third-Party-Services-(R7))
+1. [Project Models (R8)](Project-Models-(R8))
+1. [Database Relations (R9)](Database-Relations-(R9))
+1. [Project Management (R8)](Project-Management-(R10))
 
 ### ***Links:***
 
@@ -21,6 +28,50 @@
 
 </br>
 
+
+## ***Quickstart***  
+
+1. Open a new terminal window, run PSQL and create a new PostgreSQL database entitled `personnel`:
+    ```psql
+    ~psql
+    CREATE DATABASE personnel;
+    ```
+2. Connect to the new database:
+    ```psql
+    \c personnel
+    ```
+3. Create a New User, set a Password and grant all privileges:
+    ```psql
+    CREATE USER <user> WITH PASSWORD <password>;
+
+    GRANT ALL PRIVILEGES ON <database_name> TO <user>;
+    ```
+4. In the main project directory create a ```.env``` file using ```.env.sample```  as a template. 
+    - The Database URI should be formatted as ```Database+adapter://<user>:<password>@<host name>:<port>/<database>```
+        
+        eg: ```
+        DATABASE_URI='postgresql+psycopg2://<YOUR_USER_NAME>:<YOUR_USER_PASSWORD>@localhost:5432/personnel'```
+    - The JWT Secret sould be something secure. 
+        - Hint:
+        generate secret code in the terminal:
+        ```
+            # $ python3 -c 'import secrets; print(secrets.token_hex())'
+        ```
+5. You should now be able to run the bash script from the terminal to create a .venv folder, install requirements, set up the database tables and seed them with sample date: 
+    ```
+    $ bash create_and_seed.sh
+    ```
+
+6. Now that the database and project environments are set up, to run the app from the terminal activate the virtual environment:
+    ```
+    $ source .venv/bin/activate
+    ```
+    and run the program:
+    ```
+    $ flask run
+    ```
+</br>
+</br>
 ### **Project Purpose (R1, R2)**
 
 There is currently no centralized database cataloging all the musicians that performed and contributed to recorded albums. While the information can be searched for on the internet it is usually found in disparate places with varying degrees of accuracy. Because the music industry has largely been driven by profit motive with little incentive to document the artistic product being created a great deal of data is either missing or hard to access. It is only with the privilege of hindsight that the cultaral importance of the contributions of the many side musicians has come into light, as can be seen with many books and documentaries(Muscle Shoals(2013), The Wrecking Crew(2014)) illuminating the seledom visited world of supporting session musicians. The App creates a platform to document musical contributions and query the information in many ways, such as discovering all session musicians that peformed on your favorite song, or listing all of the tracks a given musician played on. The Personnel API seeks to address to the problem of a historical lack of addredidation of musical contributions, important to scholarly and cultural research as well as for its role in providing financial compensation for contributing artists and their heirs. The Personnel API seeks to create a rich ecosystem for music fans and scholarly researchers alike to find information about our musical cultural heritage.
@@ -125,45 +176,3 @@ An Object Relational Mapper (ORM) acts as a layer between a databse and higher l
 </br>
 
 
-## ***Quickstart***  
-
-1. Create a new PostgreSQL database entitled 'personnel':
-    ```psql
-    CREATE DATABASE personnel
-    ```
-2. Connect to the new database:
-    ```psql
-    \c personnel
-    ```
-3. Create a New User, set a Password and grant all privileges:
-    ```psql
-    CREATE USER <user> WITH PASSWORD <password>;
-
-    GRANT ALL PRIVILEGES ON <database_name> TO <user>;
-    ```
-4. Create a ```.env``` file in the main project directory, using ```.env.sample```  as a template. 
-    - The Database URI should be formatted as ```Database+adapter://<user>:<password>@<host name>:<port>/<database>```
-        
-        eg: ```
-        DATABASE_URI='postgresql+psycopg2://<YOUR_USER_NAME>:<YOUR_USER_PASSWORD>@localhost:5432/personnel'
-        ```
-    - The JWT Secret sould be something secure. 
-        - Hint:
-        generate secret code in the terminal:
-        ```
-            # $ python3 -c 'import secrets; print(secrets.token_hex())'
-        ```
-5. You should now be able to run the bash script from the terminal to create a .venv folder, install requirements, set up the database tables and seed them with sample date: 
-    ```
-    $ bash create_and_seed.sh
-    ```
-
-6. Now that the database and project environments are set up, to run the app from the terminal:
-    ```
-    $ source .venv/bin/activate
-    ```
-    and run the program:
-    ```
-    $ flask run
-    ```
-    
