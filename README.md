@@ -30,8 +30,20 @@ There is currently no centralized database cataloging all the musicians that per
 </br>  
 
 ### Why PostgreSQL (R3)
-PostgreSQL is an extremely popular and relational database management system that excels at production level scale. It is open sourced and has over thirty-five years of support and development by an active community. Because of this PostgresQL enjoys frequent updates, upgrades and bug fixes. The open-source community has also developed extensive tools, libraries and frameworks which enable integration into many languages and project environments. Although PostgreSQL does support NoSQL databases it is primarily aimed towards managing SQL databases - a database structure that was created in the early 1970's. This history results in ample documentation and a set of tried and tested best practices for creating robust and efficient databases. PostgreSQL supports many data types including geolocation, geospatial as well as user defined data types and functions. PostgerSQL is adept at promoting data integrity and durability, implementing ACID (Atomicity, Consistency, Isolation, Durability) transactions, write-ahead logging (WAL) and point-in-time recovery. DDL, DML and DQL in PostgreSQL are extremely straightforward using directives that more closely resemble plain english than code. PostgreSQL query language is extremely powerful with near limitless parameters for retrieving records. Because PostgreSQL is primarily designed for SQL databases it promotes well defined relational data structures that are strongly typed, with many optional constraints and validations ensuring data integrity and robustness.
+I chose PostgreSQL for the Personnel API project because it is an extremely robust relational database management system that excels at both small and production level scale. It has over thirty-five years of support and development by an active community with an extensive set of open source tools, libraries and frameworks. PostgreSQL supportas a huge amount of datatypes with approprate validation and constraints for each. PostgerSQL is adept at promoting data integrity and durability, implementing ACID (Atomicity, Consistency, Isolation, Durability) transactions, write-ahead logging (WAL) and point-in-time recovery. PostgreSQL query language is extremely powerful with near limitless parameters for retrieving records. Because PostgreSQL is primarily designed for SQL databases it promotes well defined relational data structures that are strongly typed, with many optional constraints and validations ensuring data integrity and robustness. The Personnel API database leverages a relational model with join tables and multiple relational associations making PostgreSQL a clear forerunner for creating and managing these associations, facilitating querying and manipulating data with complex interacting relationships. The web-like nature of artistic careers and associations that can span decades with abundant overlapping relationships pose a huge challenge to model logically and economically, but PostgreSQL excels at managing a dataset that has a tendency towards duplicate data. After normalization it promotes a database with no redundant data, promoting data integrity and conservative usage of resources with regard to both storage and querying and manipulation of data.
 
+Some drawbacks of PostgreSQL compared to other Database Management Systems are that it is marginally more difficult to set up, and marginally slower compared to some lighter weight frameworks such as MySQL. However with ample documentation and functionality with regard to data integrity, validation and constraints features this seemed like a reasonable tradeoff. Additionally, compared to a NoSQL DBMS PostgreSQL requires much more planning and modelling at the outset of the project, and poses more challenges to restructure the database should the scope or needs of the project change throughout production. However this is less an issue with PostgreSQL itself and more in the scope of an SQL vs NoSQL database debate.
+
+
+</br>  
+</br>  
+
+### ORM: Benefits and functionality (R4)
+
+**Functionality:**
+An Object Relational Mapper (ORM) acts as a layer between a databse and higher level programming languages and framewords such as Python and Flask. Its main functinality is to provide mapping between a chosen database and an object oriented prgramming language, allowing the user to interact with a database converting native classes to tables and objects to database records. The user can implement the full range of CRUD operations within the database in a familiar language, versus incorporating SQL syntax and commands within their code; the ORM then translates these directives into SQL in order to interact with the database more seamlessly. Additionally, querying can accomplished using more familiar syntax, excluding the need to incorporate SQL queries within the codebase. ORMs also provide functionality to construct and manage relationships and associations, automatically connecting related entities and performing integrity checks such as those relating to foreign key constraints without having to manually ensure integrity is enforced. ORMs are generally database agnostic, meaning they can be connected to many different DBMS's, granting a great deal of flexiblity and universality to the database an app interacts with, without having to functionally alter it. Most ORM's( either nativley or through extensions) provide functionality to convert datatypes, including between native datatypes, database datatypes and JSON. They can also offer addtional schema construction as well as data sanitisaztion and validation. Lastly, the ORM provides functionality for creating and constructing transactions by using a session object, giving the user the ability to interact with the database in more complicated ways before commiting any changes to the database by commiting the constructed session object.  
+
+**Benefits:** ORMs are essential to interacting with databases on the application level. They allow the developer to forego including SQL or other targeted database syntax into their code. Using higher level language to interact with a database saves time in development and creates a more streamlined codebase. Constructing a databases tables, with defined constraints can be accomplished using an Object Oriented Approach, allowing for easy DDL that can be updated or changed at the application level, foregoing the need to directly interact with the database to define tables. Querying can also be accomplished with language more familiar to the high level programming language, foregoing the need to learn, understand and implement the more specified language of database queries, such as those found in SQL. ORMs provide a great deal of functionality with conversion of datatypes, allowing for datatypes to be converted between queries and commits with out ,much consideration necessary by the developer, eliminating the need to manually convert datatypes constantly. Relationships and associations can be accomplished with very little effort, providing huge payoffs with functionality, eliminating the need for continally defining or querying related records. These nested records can further be configured by implementing Schemas (either natively or through extensions such as Marshmallow). Using schemas can also be extremely powerful with regard to validating and sanitizing user information before commiting to the database, further enabling data integrity.
 
 
 </br>  
@@ -62,13 +74,13 @@ PostgreSQL is an extremely popular and relational database management system tha
 
 
 - [**Flask**](https://flask.palletsprojects.com/en/2.3.x/)  
-    Flask is a lightweight Python web framework implemented primarily to handle HTTP request/response cycles and routing.   
+    Flask is a lightweight Python web framework and is the context our app is created in. It is implemented primarily to handle HTTP request/response cycles, routing, accepting user data in teh form of JSON to be handled and stored in the database, or serving JSON responses from https requests.   
 
       
 
 
 - [**Flask-JWT-Extended**](https://flask-jwt-extended.readthedocs.io/en/stable/) 
-    JWT was implemented to create and manage JWT tokens, aiding functionality for authentication.
+    JWT was implemented to create and manage JWT tokens, aiding functionality for authentication. Its primary uses are for token managemnt, creating bearer tokens and authenticating bearer tokens. 
 
 
 - [**Flask-SQLAlchemy**](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/)  
@@ -76,7 +88,7 @@ PostgreSQL is an extremely popular and relational database management system tha
     
 
 - [**Flask-Marshmallow**](https://flask-marshmallow.readthedocs.io/en/latest/)  
-    Flask-Marshmallow was used to serialize/deserialize objects between python and the database, as well as converting python objects to JSON for HTTP responses. It is also used heavily for validation.
+    Flask-Marshmallow was used to serialize/deserialize objects between python and the database, as well as converting python objects to JSON for HTTP responses. It is also used heavily in constructing model schemas and user input validation/sanitization.
     
 
 - [**PostgreSQL**](https://www.postgresql.org)  
@@ -88,7 +100,7 @@ PostgreSQL is an extremely popular and relational database management system tha
     
 
 - [**Python-dotenv**](https://pypi.org/project/python-dotenv/)   
-    Python-dotenv reads key-value pairs from the .env file, allowing the app to encapsulate sensitive information thereby protecting the integrity of the app from malicious actors.  
+    Python-dotenv reads key-value pairs from the .env file, allowing the app to access this data through the environ module. This helps to encapsulate sensitive information, protecting the integrity of the app from malicious actors.  
     
 
 </br>
