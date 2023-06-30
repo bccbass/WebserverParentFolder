@@ -15,7 +15,7 @@
 1. [Quickstart](#Quickstart)
 1. [Project Purpose (R1, R2)](<#Project-Purpose-(R1,-R2)>)
 1. [Why PostgreSQL (R3)](<#Why-PostgreSQL-(R3)>)
-1. [ORM: Benefits and functionality (R4)](<#ORM:-Benefits-and-functionality-(R4)>)
+1. [ORM Benefits and functionality (R4)](<#ORM-Benefits-and-functionality-(R4)>)
 1. [Endpoints (R5)](<#Endpoints-(R5)>)
 1. [ERD (R6)](<#ERD-(R6)>)
 1. [Third Party Services (R7)](<#Third-Party-Services-(R7)>)
@@ -92,7 +92,7 @@ Some drawbacks of PostgreSQL compared to other Database Management Systems: It c
 </br>  
   
 
-### **ORM: Benefits and functionality (R4)**  
+### **ORM Benefits and functionality (R4)**  
 
 **Functionality:**
 An Object Relational Mapper (ORM) acts as a layer between a databse and higher level programming languages and framewords such as Python and Flask. Its main functinality is to provide mapping between a chosen database and an object oriented prgramming language, allowing the user to interact with a database using high level language, mapping native datatypes to database tables and records (and vice-versa) effortlessly. The user can implement the full range of CRUD operations within the database in a familiar language, versus incorporating SQL syntax and commands within their code; the ORM then translates these directives into SQL in order to interact with the database more seamlessly. Additionally, querying can be accomplished using more familiar syntax, excluding the need to incorporate SQL queries within the codebase. ORMs also provide functionality to construct and manage relationships and associations, automatically connecting related entities and performing integrity checks, such as those relating to foreign key constraints, without having to manually ensure integrity is enforced. ORMs are generally database agnostic, meaning they can be connected to many different DBMS's, granting flexiblity and universality to choosing the database an app interacts with. Most ORM's (either nativley or through extensions such as Marshmallow for Flask) allow for functionality to convert datatypes, including between native datatypes, database datatypes and JSON. In the case of Flask-Marshmallow, addtional schema construction and extended data sanitisaztion and validation offer indispensiple functionality. Lastly, the ORM allows for creating and constructing transactions by using a session object, giving the user the ability to interact with the database in more complicated and sequential ways before making changes to the database by commiting the constructed session object.
