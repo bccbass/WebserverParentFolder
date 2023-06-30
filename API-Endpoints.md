@@ -65,6 +65,8 @@ Retrieves a list of all albums in the database.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
 
+
+
 ### **GET** `/albums/{album_id}`
 
 Retrieves a single album from the database.
@@ -76,6 +78,8 @@ Retrieves a single album from the database.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
 - Response: _404_
+
+
 
 
 ### **POST** `/albums`
