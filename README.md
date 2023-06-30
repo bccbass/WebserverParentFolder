@@ -19,9 +19,9 @@
 1. [Endpoints (R5)](<#Endpoints-(R5)>)
 1. [ERD (R6)](<#ERD-(R6)>)
 1. [Third Party Services (R7)](<#Third-Party-Services-(R7)>)
-1. [Project Models (R8)](<Project-Models-(R8)>)
-1. [Database Relations (R9)](<Database-Relations-(R9)>)
-1. [Project Management (R10)](<Project-Management-(R10)>)
+1. [Project Models (R8)](<#Project-Models-(R8)>)
+1. [Database Relations (R9)](<#Database-Relations-(R9)>)
+1. [Project Management (R10)](<#Project-Management-(R10)>)
 
 ### **Links:**
 
@@ -196,16 +196,20 @@ Project management and planning are imperative for productive and stream lined s
 ![trello-overview-current](./docs/r10-screenshots//Screenshot%202023-06-30%20at%203.16.51%20PM.png)  
 ##### Current stages of development as of 6/30/2023  
 
-Features were defined in early stages of development and were completed in sprints, checking of completed list items until the feature requirements were met:
+Features were defined in early stages of development and were completed in sprints, checking off completed list items until the feature requirements were met:
 ![feature-example](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.51.53%20AM.png)
 
 As the scope of models to create basic CRUD operations was numerous, an entire CRUD feature list was implemented and invaluable to ensure all basic endpoints would be available:
 ![feature-crud-checklist](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.53.17%20AM.png)
 
-User stories were an invaluable tool to help guide the features and endpoints to be included in the project. They provided real world use cases from a variety of user perspectives adding depth and meaning to the projects stated goals. 
-![user-story-1](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.20%20AM.png)    
+User stories were an invaluable tool to help guide the features and endpoints to be included in the project. They provided real world use cases from a variety of user perspectives adding depth and meaning to the projects stated goals.  
+
+![user-story-1](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.20%20AM.png)  
+
 Not only were user stories used to guide the spirit of the project, they were also implemented as descriptive endpoint destinations for the API:  
-![user-story-2](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.10%20AM.png)
+
+![user-story-2](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.10%20AM.png)  
+
 
 Daily standups aided by the Coder Academy Discord Server were helpful in defining accomplishments, challenges and setting goals for the next daily iteration. These standups are instrumental in 'framing' the daily iteration, providing reflection, perspective and direction for the next iterative period.
 ![standup](./docs/r10-screenshots/standup.png) 
