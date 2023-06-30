@@ -89,9 +89,10 @@ PostgreSQL was used for the Personnel API project because it is an extremely rob
 Some drawbacks of PostgreSQL compared to other Database Management Systems: It can be more difficult to set up than other frameworks such as MySQL, posing a larger entry barrier for less experienced developers. While it has faster write speeds than MySQL it has much slower read speeds. Because PostgreSQL creates a new system process for each connected user it has much higher memory usage when multiple users are connected, allocating roughly 10mb per connected user. This poses significant resource requirements when scaling for multiple users. In comparison, MySQL uses a single system process which results in extremely efficient perforamance in read-heavy applications. Additionally, compared to a NoSQL DBMS PostgreSQL requires much more planning and modelling at the outset of the project, and poses more challenges to restructure the database should the scope or needs of the project change throughout production. However this issue is less specific to PostgreSQL itself and more in the scope of an SQL vs NoSQL database debate. After comparing other database options PostgreSQL remained the dbms of choice as the ample documentation, efficient write performance and functionality with regard to data integrity, validation and constraints outweighed any potential shortcomings.
 
 </br>  
-</br>
+</br>  
+  
 
-### **ORM: Benefits and functionality (R4)**
+### **ORM: Benefits and functionality (R4)**  
 
 **Functionality:**
 An Object Relational Mapper (ORM) acts as a layer between a databse and higher level programming languages and framewords such as Python and Flask. Its main functinality is to provide mapping between a chosen database and an object oriented prgramming language, allowing the user to interact with a database using high level language, mapping native datatypes to database tables and records (and vice-versa) effortlessly. The user can implement the full range of CRUD operations within the database in a familiar language, versus incorporating SQL syntax and commands within their code; the ORM then translates these directives into SQL in order to interact with the database more seamlessly. Additionally, querying can be accomplished using more familiar syntax, excluding the need to incorporate SQL queries within the codebase. ORMs also provide functionality to construct and manage relationships and associations, automatically connecting related entities and performing integrity checks, such as those relating to foreign key constraints, without having to manually ensure integrity is enforced. ORMs are generally database agnostic, meaning they can be connected to many different DBMS's, granting flexiblity and universality to choosing the database an app interacts with. Most ORM's (either nativley or through extensions such as Marshmallow for Flask) allow for functionality to convert datatypes, including between native datatypes, database datatypes and JSON. In the case of Flask-Marshmallow, addtional schema construction and extended data sanitisaztion and validation offer indispensiple functionality. Lastly, the ORM allows for creating and constructing transactions by using a session object, giving the user the ability to interact with the database in more complicated and sequential ways before making changes to the database by commiting the constructed session object.
@@ -152,11 +153,11 @@ FLASK
 
 ### **Database Relations (R9)**
 
-Modelling the complex and weblike interactions of session musicians and the recordings to which they have contributed over careers that often span decades poses many unique challenges. It required a great deal of consideration to construct a database structure that was logical and normalized but allowed room for the organic and serpentine nature of the data being recorded. The models were constructed in a hierarchical manner, nesting each progressive entity via a primary/foreign key relationship. There was one many-to-many relationship tracked, joining musicians who could perform on a song with the many songs they contributed to. The spirit of the hierarchy is: artists _have_ albums _that have_ tracks _that have_ musicians _who are associated with an_ instrument.
+Modelling the complex and weblike interactions of session musicians and the recordings to which they have contributed over careers that often span decades poses many unique challenges. It required a great deal of consideration to construct a database structure that was logical and normalized but allowed room for the organic and serpentine nature of the data being recorded. The models were constructed in a hierarchical manner, nesting each progressive entity via a primary/foreign key relationship. There was one many-to-many relationship tracked, joining musicians who performed on a song with the many songs they contributed to. The spirit of the hierarchy is: artists _have_ albums _that have_ tracks _that have_ musicians _who are associated with an_ instrument.
 
 - Artist:  
   ![artist-model](./docs/models/artists-model.png)  
-  The artist model stores the artist, ensemble or band that an album is recorded by. As the scope of the API is primarily focused on the session musicians involved, and general information about most recording artists is readly available, this model is light on extra data. It should be noted that session musicans can also be artists, and in this instance they would be seperate entities as the roles of artist and musician are purposefully bifurcated for this context. This can be seen in the case of `"Davis, Miles"` the artist and `"Miles Davis"` the trumpeter. The artist model is an entity with ownership of a recorded album (think of bands, ensembles, symphony orchestras), so in this instance there is an implicit role coercion of a musician who has released albums under their own name to an artist entity. This was necessary as can be seen by examining the converse scenario: The Rolling Stones or the New York Philharmonic could not be classified as musicians within this database model. Additionally, because the Musician model stores data that is more pertinent to an indivudal human being the decision was made to create these seperate entities as their functions within the music industry were so different.
+  The artist model stores the artist, ensemble or band that an album is recorded by. As the scope of the API is primarily focused on the session musicians involved, and general information about most recording artists is readly available, this model is light on extra data. It should be noted that session musicans can also be artists, and in this instance they would be seperate entities as the roles of artist and musician are purposefully bifurcated for this context. This can be seen in the case of `"Davis, Miles"` the artist and `"Miles Davis"` the trumpeter. The artist model is an entity with ownership of a recorded album (think of bands, ensembles, symphony orchestras), so in this instance there is an implicit role coercion of a musician who has released albums under their own name to an artist entity. This was necessary as can be seen by examining the converse scenario: Nirvana or the New York Philharmonic could not be classified as musicians within this database model.
 
 - Album:  
   ![album-model](./docs/models/albums-model.png)  
@@ -182,7 +183,34 @@ Modelling the complex and weblike interactions of session musicians and the reco
   </br>
   </br>
 
-### **Project Management (R10)**
+### **Project Management (R10)**  
+
+Project management and planning are imperative for productive and stream lined software development. By laying out the projects requirements and the steps needed to meet those requirements implementation becomes more manageable and efficient. In planning for the Personnel API many elements from AGILE development were incorporated, including user stories, daily standups, features and sprints to complete the features. In addition to creating an accurate ERD early in development, [Trello](https://trello.com/invite/b/VWm2omOk/) was used heavily to plan and track the projects development. Trello is a project management web app that excels at tracking numerous tasks, with extended functionality for dates/deadlines as well as team collaboration. Before beginning the project the trello board was populated with cards for In-progress tasks, To Do tasks, Features and Completed tasks. Mid-development cards for bugs and for fixed-bugs were implemented to track smaller issues that needed attention. Deadlines were associated with tasks to ensure the project stayed on course, within scope and would be delivered within the assigned timeframe.  
+
+![trello-overview](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.51.27%20AM.png)
+##### Earlier stages of development 6/25/2023  
+  
+
+</br>
+
+![trello-overview-current](./docs/r10-screenshots//Screenshot%202023-06-30%20at%203.16.51%20PM.png)  
+##### Current stages of development as of 6/30/2023  
+
+Features were defined in early stages of development and were completed in sprints, checking of completed list items until the feature requirements were met:
+![feature-example](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.51.53%20AM.png)
+
+As the scope of models to create basic CRUD operations was numerous, an entire CRUD feature list was implemented and invaluable to ensure all basic endpoints would be available:
+![feature-crud-checklist](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.53.17%20AM.png)
+
+User stories were an invaluable tool to help guide the features and endpoints to be included in the project. They provided real world use cases from a variety of user perspectives adding depth and meaning to the projects stated goals. 
+![user-story-1](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.20%20AM.png)    
+Not only were user stories used to guide the spirit of the project, they were also implemented as descriptive endpoint destinations for the API:  
+![user-story-2](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.10%20AM.png)
+
+Daily standups aided by the Coder Academy Discord Server were helpful in defining accomplishments, challenges and setting goals for the next daily iteration. These standups are instrumental in 'framing' the daily iteration, providing reflection, perspective and direction for the next iterative period.
+![standup](./docs/r10-screenshots/standup.png) 
+
+Lastly, Git and Github were implemented for source control of both the main code base as well as the documentation material, aiding feature development between local and remote repositories. 
 
 </br>
 </br>
