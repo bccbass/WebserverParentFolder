@@ -17,10 +17,9 @@
 1. [Why PostgreSQL (R3)](<#Why-PostgreSQL-(R3)>)
 1. [ORM Benefits and functionality (R4)](<#ORM-Benefits-and-functionality-(R4)>)
 1. [Endpoints (R5)](<#Endpoints-(R5)>)
-1. [ERD (R6)](<#ERD-(R6)>)
 1. [Third Party Services (R7)](<#Third-Party-Services-(R7)>)
 1. [Project Models (R8)](<#Project-Models-(R8)>)
-1. [Database Relations (R9)](<#Database-Relations-(R9)>)
+1. [Database Relations (R6, R9)](<#ERD-and-Database-Relations-(R6,-R9)>)
 1. [Project Management (R10)](<#Project-Management-(R10)>)
 
 ### **Links:**
@@ -51,29 +50,42 @@
    ```
 
 4. In the main project directory create a `.env` file using `.env.sample` as a template.
-   - The Database URI should be formatted as `Database+adapter://<user>:<password>@<host name>:<port>/<database>`
-     eg: `
-  DATABASE_URI='postgresql+psycopg2://<YOUR_USER_NAME>:<YOUR_USER_PASSWORD>@localhost:5432/personnel'`
+   - The Database URI should be formatted as:  
+   `Database+adapter://<user>:<password>@<host name>:<port>/<database>`  
+     eg:
+     
+```py
+  DATABASE_URI='postgresql+psycopg2://<YOUR_USER_NAME>:<YOUR_USER_PASSWORD>@localhost:5432/personnel'
+  ```
    - The JWT Secret sould be something secure.
      - Hint:
        generate secret code in the terminal:
-     ```
-         # $ python3 -c 'import secrets; print(secrets.token_hex())'
+     ```bash
+         $ python3 -c 'import secrets; print(secrets.token_hex())'
      ```
 5. You should now be able to run the bash script from the terminal to create a .venv folder, install requirements, set up the database tables and seed them with sample date:
 
-   ```
+   ```bash
    $ bash create_and_seed.sh
    ```
 
-6. Now that the database and project environments are set up, to run the app from the terminal activate the virtual environment:
-   `    $ source .venv/bin/activate
-   `
-   and run the program:
-   `    $ flask run
-   `
-   </br>
-   </br>
+6. The database and project environments are now set up. To run the app from the terminal:  
+ activate the virtual environment:  
+
+   ```bash
+       $ source .venv/bin/activate 
+   ```  
+
+   and run the program:  
+
+   ```bash  
+       $ flask run
+   ```  
+
+
+7. Authentication: To use the API a user must register via the `/users/register` route. The user may then login via the `/users/login` route, which will result in a JWT token being sent in a JSON respone. This token is valid for 30 days and must be included in the authentication header for each HTTP request as a bearer token. After 30 days the user may simply login again to generate a new token.  
+
+</br>
 
 ### **Project Purpose (R1, R2)**
 
@@ -109,32 +121,27 @@ An Object Relational Mapper (ORM) acts as a layer between a databse and higher l
 </br>  
 </br>
 
-### **ERD (R6)**
 
-![Personnel ERD](./docs/Personnel_ERD.jpg)
-
-</br>  
-</br>
 
 ### **Third Party Services (R7)**
 
 - [**Flask-Bcrypt**](https://flask-bcrypt.readthedocs.io/en/1.0.1/)  
-   Implemented for Password hashing. Bcrypt is designed to be 'de-optimized', making it much more difficult to crack with the prevalence of powerful modern hardware. Hashed passwords were then decoded using UTF-8, which is industry standard practice.
+   Implemented for Password hashing. Bcrypt is designed to be 'de-optimized', making it much more difficult to crack with the prevalence of powerful modern hardware. Hashed passwords are then encoded using UTF-8, which is industry standard practice. 
 
 - [**Flask**](https://flask.palletsprojects.com/en/2.3.x/)  
    Flask is a lightweight Python web framework and is the main frameword our app is created in, helping to create models and controllers for the API. It is implemented primarily to handle HTTP request/response cycles, routing, accepting user data in the form of JSON to write to the database, ands serving JSON responses constructed from database records.
 
 - [**Flask-JWT-Extended**](https://flask-jwt-extended.readthedocs.io/en/stable/)
-  JWT was implemented to create and manage JWT tokens, aiding functionality for authentication and authorization. Its primary uses are for token managemnt, creating and authenticating bearer tokens.
+  JWT was implemented to create and manage JWT tokens, aiding functionality for authentication and authorization. Its primary uses are for token managemnt, creating and authenticating bearer tokens. Flask-JWT-Extended creates a token with a header, payload and signature secret which is sent to the client by an http response as a JSON that includes the token as a string. The user then includes this token in the HTTPS header for each request to authenticate and detect in-transit tampering.
 
 - [**Flask-SQLAlchemy**](https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/)  
    Implemented as an Object Relational Mapper (ORM) to interact with the PostgreSQL database. SQLAlchemy allows the user to interact with a database using native datatypes and high level language, creating seamless database integration into the project and eliminating the need to write SQL commands within the codebase. This has the advantage of saving development time and streamlining the codebase.
 
 - [**Flask-Marshmallow**](https://flask-marshmallow.readthedocs.io/en/latest/)  
-   Flask-Marshmallow was used to serialize/deserialize objects between python and the database, as well as converting python objects to JSON for HTTP responses. It is also used heavily in constructing model schemas and user input validation/sanitization.
+   Flask-Marshmallow was used to serialize/deserialize objects between python and the database, as well as converting python objects to JSON for HTTP responses. It is used to construct schemas which aid in controlling what data from a record is served to the user in any given JSON response. Flask-Marshmallow is also invaluable for validating and sanitizing incoming user data before it is commited to the database, adding additional security and data integrity. 
 
 - [**PostgreSQL**](https://www.postgresql.org)  
-   PostgreSQL was the RDBMS implemented for the API. It is a robust, open-source database with great support and features. There are also extensive frameworks and libraries available to easily integrate it into many project environments.
+   PostgreSQL was the RDBMS implemented for the API. It is a robust, open-source database with great support and features. There are also extensive frameworks and libraries available to easily integrate it into many project environments. Its relational structure works well with the Personnel database model, handling associations with ease.
 
 - [**Pyscopg2-binary**](https://pypi.org/project/psycopg2/)  
    SQLAlchemy is database agnostic so an adaptor must be implemented as a utility to connect it to the PostgreSQL database.
@@ -151,7 +158,9 @@ FLASK
 </br>
 </br>
 
-### **Database Relations (R9)**
+### **ERD and Database Relations (R6, R9)**
+
+![Personnel ERD](./docs/Personnel_ERD.jpg)
 
 Modelling the complex and weblike interactions of session musicians and the recordings to which they have contributed over careers that often span decades poses many unique challenges. It required a great deal of consideration to construct a database structure that was logical and normalized but allowed room for the organic and serpentine nature of the data being recorded. The models were constructed in a hierarchical manner, nesting each progressive entity via a primary/foreign key relationship. There was one many-to-many relationship tracked, joining musicians who performed on a song with the many songs they contributed to. The spirit of the hierarchy is: artists _have_ albums _that have_ tracks _that have_ musicians _who are associated with an_ instrument.
 
@@ -185,7 +194,7 @@ Modelling the complex and weblike interactions of session musicians and the reco
 
 ### **Project Management (R10)**  
 
-Project management and planning are imperative for productive and stream lined software development. By laying out the projects requirements and the steps needed to meet those requirements implementation becomes more manageable and efficient. In planning for the Personnel API many elements from AGILE development were incorporated, including user stories, daily standups, features and sprints to complete the features. In addition to creating an accurate ERD early in development, [Trello](https://trello.com/invite/b/VWm2omOk/) was used heavily to plan and track the projects development. Trello is a project management web app that excels at tracking numerous tasks, with extended functionality for dates/deadlines as well as team collaboration. Before beginning the project the trello board was populated with cards for In-progress tasks, To Do tasks, Features and Completed tasks. Mid-development cards for bugs and for fixed-bugs were implemented to track smaller issues that needed attention. Deadlines were associated with tasks to ensure the project stayed on course, within scope and would be delivered within the assigned timeframe.  
+Project management and planning are imperative for productive and stream lined software development. By laying out the projects requirements and the steps needed to meet those requirements implementation becomes more manageable and efficient. In planning for the Personnel API many elements from AGILE development were incorporated, including user stories, daily standups, features and sprints to complete the features. In addition to creating an accurate ERD early in development, [Trello](https://trello.com/invite/b/VWm2omOk/) was used heavily to plan and track the projects development. Trello is a project management web app that excels at tracking numerous tasks, with extended functionality for dates/deadlines as well as team collaboration. It's design is perfectly suited to facilitate Agile project development. Before beginning the project the trello board was populated with cards for In-progress tasks, To Do tasks, Features and Completed tasks. Mid-development cards for bugs and for fixed-bugs were implemented to track smaller issues that needed attention.
 
 ![trello-overview](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.51.27%20AM.png)
 ##### Earlier stages of development 6/25/2023  
@@ -195,6 +204,11 @@ Project management and planning are imperative for productive and stream lined s
 
 ![trello-overview-current](./docs/r10-screenshots//Screenshot%202023-06-30%20at%203.16.51%20PM.png)  
 ##### Current stages of development as of 6/30/2023  
+
+ Deadlines were set and associated with tasks to ensure the project stayed on course, within scope and would be delivered within the assigned timeframe. Each task and feature was given a due date, which was conceived by considering the work flow needed for development and estimating the necessary amount of time required. Labels were also created and implemented to help organize tasks and associate them with specific role. 
+ ![labels and due date example](./docs/r10-screenshots/labels-duedate-example.png) 
+ ##### examples of labels and due dates in project management  
+
 
 Features were defined in early stages of development and were completed in sprints, checking off completed list items until the feature requirements were met:
 ![feature-example](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.51.53%20AM.png)
