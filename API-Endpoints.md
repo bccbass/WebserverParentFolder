@@ -10,6 +10,7 @@ All endpoints require an account and for the user to be logged in with an active
 1. [Musician](#Musician)
 1. [Credit (track_musician)](#Credit)
 1. [Instrument](#Instrument)
+1. [Errors](#Auth-and-Validation-errors-examples)
 
 ## Authentication
 
@@ -28,6 +29,7 @@ Log in to your account so you can access a token to interact with the API
 - parameters: None
 - Headers: None
 - Response: _200_
+- Response: _400_
 
 ### **POST** `/grant_admin_access/{user_id}`
 Admins are allowed to grant admin access to users.  
@@ -51,10 +53,29 @@ Retrieves a list of all users in the database.
 - Response: _200_
 - Response: _404_
 
+![register](./docs/postman/users/register.png)
+![register](./docs/postman/users/login.png)
+![register](./docs/postman/users/grantadmin.png)
+![register](./docs/postman/users/allusers.png)
+
 <hr>
 ## Album
 
 Albums are releases forming a collection tracks by a given artist. 
+
+
+
+### **POST** `/albums`
+
+Creates a new album record and adds to the database.  
+*Admin credentials required.*
+
+- Methods: **POST**
+- Parameters: None
+- Headers: Authorization: {Bearer Token}
+- Response: _201_
+- Response: _401_  
+
 
 ### **GET** `/albums`
 
@@ -81,17 +102,6 @@ Retrieves a single album from the database.
 
 
 
-
-### **POST** `/albums`
-
-Creates a new album record and adds to the database.  
-*Admin credentials required.*
-
-- Methods: **POST**
-- Parameters: None
-- Headers: Authorization: {Bearer Token}
-- Response: _201_
-- Response: _401_
 
 
 ### **PUT/PATCH** `/albums/{album_id}`
@@ -120,12 +130,31 @@ Deletes an album from the database.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
 - Response: _401_, _404_
+
+![users postman screenshots](./docs/postman/albums_postman/c_albums.png)
+![users postman screenshots](./docs/postman/albums_postman/r_albums.png)
+![users postman screenshots](./docs/postman/albums_postman/r1_albums.png)
+![users postman screenshots](./docs/postman/albums_postman/u_albums.png)
+![users postman screenshots](./docs/postman/albums_postman/d_albums.png)
 <hr>
 
 
 ## Artist
 
 Artists represent either the person or group name an album is released by.
+
+
+### **POST** `/artists`
+
+Creates a new artist record and adds to the database.  
+*Admin credentials required.*
+
+- Methods: **POST**
+- Parameters: None
+- Headers: Authorization: {Bearer Token}
+- Response: _201_
+- Response: _401_
+
 
 ### **GET** `/artists`
 
@@ -148,17 +177,6 @@ Retrieves a single artist from the database.
 - Response: _200_
 - Response: _404_
 
-
-### **POST** `/artists`
-
-Creates a new artist record and adds to the database.  
-*Admin credentials required.*
-
-- Methods: **POST**
-- Parameters: None
-- Headers: Authorization: {Bearer Token}
-- Response: _201_
-- Response: _401_
 
 
 ### **PUT/PATCH** `/artists/{artist_id}`
@@ -186,7 +204,13 @@ Deletes an artist from the database.
      The id of the artist you are attempting to delete.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _401_, _404_
+- Response: _401_, _404_  
+
+![artists postman screenshots](./docs/postman/artists_postman/c_artists.png)
+![artists postman screenshots](./docs/postman/artists_postman/r_artists.png)
+![artists postman screenshots](./docs/postman/artists_postman/r1_artists.png)
+![artists postman screenshots](./docs/postman/artists_postman/u_artists.png)
+![artists postman screenshots](./docs/postman/artists_postman/d_artists.png)
 
 <hr>
 
@@ -244,7 +268,12 @@ Deletes a track from the database.
      The id of the track you are attempting to delete.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _401_, _404_
+- Response: _401_, _404_  
+
+![tracks postman screenshots](./docs/postman/tracks_postman/c_tracks.png)
+![tracks postman screenshots](./docs/postman/tracks_postman/r1_tracks.png)
+![tracks postman screenshots](./docs/postman/tracks_postman/u_tracks.png)
+![tracks postman screenshots](./docs/postman/tracks_postman/d_tracks.png)
 
 <hr>
 
@@ -252,6 +281,20 @@ Deletes a track from the database.
 ## Musician
 
 Musicians represent the individual contributors of an album. For example, if The Beach Boys represent the Artist, the musicians would be all the members of the wrecking crew who performed on the songs. 
+
+
+
+### **POST** `/musicians`
+
+Creates a new musician record and adds it to the database.  
+*Admin credentials required.*
+
+- Methods: **POST**
+- Parameters: None
+- Headers: Authorization: {Bearer Token}
+- Response: _201_
+- Response: _401_
+
 
 ### **GET** `/musicians/{musician_id}`
 
@@ -265,16 +308,6 @@ Retrieves a single musician from the database.
 - Response: _200_
 - Response: _404_
 
-### **POST** `/musicians`
-
-Creates a new musician record and adds it to the database.  
-*Admin credentials required.*
-
-- Methods: **POST**
-- Parameters: None
-- Headers: Authorization: {Bearer Token}
-- Response: _201_
-- Response: _401_
 
 
 ### **PUT/PATCH** `/musicians/{musician_id}`
@@ -302,7 +335,12 @@ Deletes a musician from the database.
      The id of the musician you are attempting to delete.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _401_, _404_
+- Response: _401_, _404_  
+
+![musicians postman screenshots](./docs/postman/musicians_postman/c_musicians.png)
+![musicians postman screenshots](./docs/postman/musicians_postman/r1_musicians.png)
+![musicians postman screenshots](./docs/postman/musicians_postman/u_musicians.png)
+![musicians postman screenshots](./docs/postman/musicians_postman/d_musicians.png)
 
 <hr>
 
@@ -340,6 +378,9 @@ Creates a new track record and adds it to the database.
 - Response: _200_
 - Response: _401_, _404_
 
+![credit postman screenshots](./docs/postman/credit_postman/c_credit.png)
+![credit postman screenshots](./docs/postman/credit_postman/d_credit.png)
+![credit postman screenshots](./docs/postman/credit_postman/d_query_credit.png)
 <hr>
 
 
@@ -355,5 +396,19 @@ Retrieves a list of all instruments in the database.
 - parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _200_  
+- Response: _401_  
+
+![instrument postman screenshots](./docs/postman/r_instruments.png)
+
 
 <hr>
+
+### Auth and Validation errors examples:  
+
+![instrument postman screenshots](./docs/postman/validation-errors/401-autherror.png)
+
+![instrument postman screenshots](./docs/postman/validation-errors/badrequest-recordexists.png)
+
+![instrument postman screenshots](./docs/postman/validation-errors/record-exists-artist.png)
+
+![instrument postman screenshots](./docs/postman/validation-errors/validation-email.png)
