@@ -46,7 +46,7 @@
    ```psql
    CREATE USER <user> WITH PASSWORD <password>;
 
-   GRANT ALL PRIVILEGES ON <database_name> TO <user>;
+   GRANT ALL PRIVILEGES ON DATABASE <database_name> TO <user>;
    ```
 
 4. In the main project directory create a `.env` file using `.env.sample` as a template.
