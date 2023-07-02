@@ -58,7 +58,8 @@ Retrieves a list of all users in the database.
 ![register](./docs/postman/users/grantadmin.png)
 ![register](./docs/postman/users/allusers.png)
 
-<hr>
+<hr>  
+
 ## Album
 
 Albums are releases forming a collection tracks by a given artist. 
@@ -347,7 +348,7 @@ Deletes a musician from the database.
 
 ## Credit
 
-Credits represents the association between musicians and tracks. They are simple join records so the only provided routes are creation and deletion. 
+Credits represents the association between musicians and tracks. They are simple join records so the only provided routes are creation and deletion. Deleting a record can be accomplished by supplying the record id, or with a query string supplying `track_id` and `musician_id`.
 
 
 ### **POST** `/credit`
@@ -361,7 +362,9 @@ Creates a new track_musician association and adds it to the database.
 - Response: _201_
 - Response: _401_
 
-### **DELETE** `/credit/{credit_id}` optional locate with query paramaters: **DELETE** `/credit/0/track_id={integer}&musician_id={integer}`
+### **DELETE** `/credit/{credit_id}`  
+ *optional locate with query paramaters:*  
+  **DELETE** `/credit/0/track_id={integer}&musician_id={integer}`
 
 Creates a new track record and adds it to the database.  
 *Admin credentials required.*
@@ -405,10 +408,15 @@ Retrieves a list of all instruments in the database.
 
 ### Auth and Validation errors examples:  
 
-![instrument postman screenshots](./docs/postman/validation-errors/401-autherror.png)
+![instrument postman screenshots](./docs/postman/validation-errors/401-autherror.png)  
+Requesting access to admin only area without proper auth
 
-![instrument postman screenshots](./docs/postman/validation-errors/badrequest-recordexists.png)
+![instrument postman screenshots](./docs/postman/validation-errors/badrequest-recordexists.png) 
+Error: post request for musician that already has a record in the database  
 
-![instrument postman screenshots](./docs/postman/validation-errors/record-exists-artist.png)
+![instrument postman screenshots](./docs/postman/validation-errors/record-exists-artist.png)  
+Error: post request for artist that already has a record in the database  
 
 ![instrument postman screenshots](./docs/postman/validation-errors/validation-email.png)
+
+Validation error for attempting to update record with an invalid url.
