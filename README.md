@@ -85,7 +85,7 @@
    ```bash  
        $ flask run
    ```  
-   The server should now be running on port 8000
+   The server should now be running on port 5000. To run the app from a different port create a new .flaskenv file based on the .flaskenv.sample template and assign a different port.  
 
 
 7. Authentication: To use the API a user must register via the `/users/register` route. The user may then login via the `/users/login` route, which will result in a JWT token being sent in a JSON response. This token is valid for 30 days and must be included in the authentication header for each HTTP request as a bearer token. After 30 days the user may simply login again to generate a new token.  
