@@ -204,7 +204,7 @@ Modeling the complex and weblike interactions of session musicians and the recor
   The artist model stores the artist, ensemble or band that an album is recorded by (Figure 8-2). As the scope of the API is primarily focused on the session musicians involved, and general information about most recording artists is readily available, this model is light on extra data. It should be noted that session musicians can also be artists, and in this instance they would be separate entities as the roles of artist and musician are purposefully bifurcated for this context. This can be seen in the case of `"Davis, Miles"` the artist and `"Miles Davis"` the trumpeter. The artist model is an entity with ownership of a recorded album (think of bands, ensembles, symphony orchestras), so in this instance there is an implicit role coercion of a musician who has released albums under their own name to an artist entity. This was necessary as can be seen by examining the converse scenario: Nirvana or the New York Philharmonic could not be classified as musicians within this database model.
 
 - Album:  
-  ![album-model](./docs/models/albums-model.png)  
+  ![album-model](./docs/models/albums_model.png)  
    ##### *Figure 8-3*
 
   Albums are associated with artists in a one-to-many relationship. An artist can have many albums but an album can have only one artist. The album model is a store for an associated artists primary key, the album title, release date, and other data that might be useful in filtering and constructing queries in meaningful ways. An albums primary key serves as the foreign key for tracks(songs), forming a one-to-many relationship and associated the album with the track(see Figure 8-3).
@@ -237,13 +237,13 @@ Modeling the complex and weblike interactions of session musicians and the recor
 
 Project management and planning are imperative for productive and stream lined software development. By laying out the projects requirements and the steps needed to meet those requirements implementation becomes more manageable and efficient. In planning for the Personnel API many elements from AGILE development were incorporated, including user stories, daily stand ups, features and sprints to complete the features. In addition to creating an accurate ERD early in development, [Trello](https://trello.com/invite/b/VWm2omOk/) was used heavily to plan and track the projects development. Trello is a project management web app that excels at tracking numerous tasks, with extended functionality for dates/deadlines as well as team collaboration. Its design is perfectly suited to facilitate Agile project development. Before beginning the project the trello board was populated with cards for In-progress tasks, To Do tasks, Features and Completed tasks. Mid-development cards for bugs and for fixed-bugs were implemented to track smaller issues that needed attention.
 
-![trello-overview](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.51.27%20AM.png)
+![trello-overview](./docs/r10-screenshots/Screenshot10.51.27.png)
 ##### Earlier stages of development 6/25/2023  
   
 
 </br>
 
-![trello-overview-current](./docs/r10-screenshots//Screenshot%202023-06-30%20at%203.16.51%20PM.png)  
+![trello-overview-current](./docs/r10-screenshots/Screenshot3.16.51.png)  
 ##### Current stages of development as of 6/30/2023  
 
  Deadlines were set and associated with tasks to ensure the project stayed on course, within scope and would be delivered within the assigned timeframe. Each task and feature was given a due date, which was conceived by considering the work flow needed for development and estimating the necessary amount of time required. Labels were also created and implemented to help organize tasks and associate them with specific categories.   
@@ -252,18 +252,18 @@ Project management and planning are imperative for productive and stream lined s
 
 
 Features were defined in early stages of development and were completed in sprints, checking off completed list items until the feature requirements were met:
-![feature-example](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.51.53%20AM.png)
+![feature-example](./docs/r10-screenshots/Screenshot10.51.53.png)
 
 As the scope of models to create basic CRUD operations was numerous, an entire CRUD feature list was implemented and invaluable to ensure all basic endpoints would be available:
-![feature-crud-checklist](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.53.17%20AM.png)
+![feature-crud-checklist](./docs/r10-screenshots/Screenshot10.53.17.png)
 
 User stories were an invaluable tool to help guide the features and endpoints to be included in the project. They provided real world use cases from a variety of user perspectives adding depth and meaning to the projects stated goals.  
 
-![user-story-1](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.20%20AM.png)  
+![user-story-1](./docs/r10-screenshots/Screenshot10.52.20.png)  
 
 Not only were user stories used to guide the spirit of the project, they were also implemented as descriptive endpoint destinations for the API:  
 
-![user-story-2](./docs/r10-screenshots/Screenshot%202023-06-25%20at%2010.52.10%20AM.png)  
+![user-story-2](./docs/r10-screenshots/Screenshot10.52.10.png)  
 
 
 Daily stand ups aided by the Coder Academy Discord Server were helpful in defining accomplishments, challenges and setting goals for the next daily iteration. These stand ups were instrumental in framing each 24 hour period, providing reflection and perspective as well as direction for the next iteration.
