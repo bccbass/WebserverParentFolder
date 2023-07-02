@@ -22,6 +22,8 @@ Create a new new user so you can interact with the API
 - parameters: None
 - Headers: None
 - Response: _201_
+- Response: _400_
+
 
 ### **POST** `/users/login`
 Log in to your account so you can access a token to interact with the API
@@ -29,7 +31,7 @@ Log in to your account so you can access a token to interact with the API
 - parameters: None
 - Headers: None
 - Response: _200_
-- Response: _400_
+- Response: _400_, _401_
 
 ### **POST** `/grant_admin_access/{user_id}`
 Admins are allowed to grant admin access to users.  
@@ -41,7 +43,7 @@ Admins are allowed to grant admin access to users.
      The id of the user you are attempting to grant admin access to.
 - Headers: Authorization: {Bearer Token}
 - Response: _202_
-- Response: _404_
+- Response: _401_, _404_
 
 ### **GET** `/users`
 Retrieves a list of all users in the database.  
@@ -51,7 +53,7 @@ Retrieves a list of all users in the database.
 - parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _404_
+- Response: _401_
 
 ![register](./docs/postman/users/register.png)
 ![register](./docs/postman/users/login.png)
@@ -75,7 +77,7 @@ Creates a new album record and adds to the database.
 - Parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_  
+- Response: _400_, _401_  
 
 
 ### **GET** `/albums`
@@ -86,6 +88,8 @@ Retrieves a list of all albums in the database.
 - parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
+- Response: _401_  
+
 
 
 
@@ -99,7 +103,7 @@ Retrieves a single album from the database.
      The id of the album you are attempting to access.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _404_
+- Response: _401_, _404_
 
 
 
@@ -116,7 +120,7 @@ Update an album from the database.
      The id of the album you are attempting to update.
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_, _404_
+- Response: _400_, _401_, _404_
 
 
 ### DELETE `/albums/{album_id}`
@@ -154,7 +158,7 @@ Creates a new artist record and adds to the database.
 - Parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_
+- Response: _400_, _401_
 
 
 ### **GET** `/artists`
@@ -165,6 +169,8 @@ Retrieves a list of all artists in the database.
 - parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
+- Response: _401_
+
 
 ### **GET** `/artists/{artist_id}`
 
@@ -176,7 +182,8 @@ Retrieves a single artist from the database.
      The id of the artist you are attempting to access.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _404_
+- Response: _401_, _404_
+
 
 
 
@@ -191,7 +198,7 @@ Update an artist from the database.
      The id of the artist you are attempting to update.
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_, _404_
+- Response: _400_, _401_, _404_
 
 
 ### DELETE `/artists/{artist_id}`
@@ -220,17 +227,7 @@ Deletes an artist from the database.
 
 Tracks represent individual songs, and may or may not be associated with an album. It is completely permissible for them to exist as their own entities, and they can be updated at a later date to asssociate them with an album release. 
 
-### **GET** `/tracks/{track_id}`
 
-Retrieves a single track from the database.
-
-- Methods: **GET**
-- Parameters:
-  - **track_id**: `Integer` _Required_  
-     The id of the track you are attempting to access.
-- Headers: Authorization: {Bearer Token}
-- Response: _200_
-- Response: _404_
 
 ### **POST** `/tracks`
 
@@ -241,7 +238,20 @@ Creates a new track record and adds it to the database.
 - Parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_
+- Response: _400_, _401_
+
+### **GET** `/tracks/{track_id}`
+
+Retrieves a single track from the database.
+
+- Methods: **GET**
+- Parameters:
+  - **track_id**: `Integer` _Required_  
+     The id of the track you are attempting to access.
+- Headers: Authorization: {Bearer Token}
+- Response: _200_
+- Response: _401_, _404_
+
 
 
 ### **PUT/PATCH** `/tracks/{track_id}`
@@ -255,7 +265,7 @@ Update an track from the database.
      The id of the track you are attempting to update.
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_, _404_
+- Response: _400_, _401_, _404_
 
 
 ### DELETE `/tracks/{track_id}`
@@ -294,6 +304,17 @@ Creates a new musician record and adds it to the database.
 - Parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
+- Response: _400_, _401_
+
+
+### **GET** `/musicians`
+
+Retrieves a list of all musicians in the database.
+
+- Methods: **GET**
+- parameters: None
+- Headers: Authorization: {Bearer Token}
+- Response: _200_
 - Response: _401_
 
 
@@ -307,7 +328,8 @@ Retrieves a single musician from the database.
      The id of the musician you are attempting to access.
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _404_
+- Response: _401_, _404_
+
 
 
 
@@ -322,7 +344,7 @@ Update an musician from the database.
      The id of the musician you are attempting to update.
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_, _404_
+- Response: _400_, _401_, _404_
 
 
 ### DELETE `/musicians/{musician_id}`
@@ -339,6 +361,7 @@ Deletes a musician from the database.
 - Response: _401_, _404_  
 
 ![musicians postman screenshots](./docs/postman/musicians_postman/c_musicians.png)
+![musicians postman screenshots](./docs/postman/musicians_postman/r_musicians.png)
 ![musicians postman screenshots](./docs/postman/musicians_postman/r1_musicians.png)
 ![musicians postman screenshots](./docs/postman/musicians_postman/u_musicians.png)
 ![musicians postman screenshots](./docs/postman/musicians_postman/d_musicians.png)
@@ -360,7 +383,7 @@ Creates a new track_musician association and adds it to the database.
 - Parameters: None
 - Headers: Authorization: {Bearer Token}
 - Response: _201_
-- Response: _401_
+- Response: _400_, _401_
 
 ### **DELETE** `/credit/{credit_id}`  
  *optional locate with query paramaters:*  
@@ -369,7 +392,7 @@ Creates a new track_musician association and adds it to the database.
 Creates a new track record and adds it to the database.  
 *Admin credentials required.*
 
-- Methods: **POST**
+- Methods: **DELETE**
 - Parameters: 
   - **credit_id**: `Integer` _Required_  
      The id of the musician you are attempting to delete.
@@ -379,7 +402,7 @@ Creates a new track record and adds it to the database.
     - example url: `/credit/0/track_id={integer}&musician_id={integer}`
 - Headers: Authorization: {Bearer Token}
 - Response: _200_
-- Response: _401_, _404_
+- Response: _400_, _401_, _404_
 
 ![credit postman screenshots](./docs/postman/credit_postman/c_credit.png)
 ![credit postman screenshots](./docs/postman/credit_postman/d_credit.png)
