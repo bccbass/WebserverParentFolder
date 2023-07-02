@@ -63,20 +63,24 @@
      ```bash
          $ python3 -c 'import secrets; print(secrets.token_hex())'
      ```
-5. You should now be able to run the bash script from the terminal to create a .venv folder, install requirements, set up the database tables and seed them with sample date:
+5. You should now be able to navigate to the `src/` directory and run the bash script from the terminal to create a .venv folder, install requirements, set up the database tables and seed them with sample data:
+
+   ```bash
+   cd src/
+   ``` 
 
    ```bash
    $ bash create_and_seed.sh
    ```
 
-6. The database and project environments are now set up. To run the app from the terminal:  
- activate the virtual environment:  
+6. The database and project environments are now set up. To run the app from the terminal make sure you are in the `src/` directory and:  
+   - Activate the virtual environment  
 
    ```bash
        $ source .venv/bin/activate 
    ```  
 
-   and run the program:  
+      - And run the program  
 
    ```bash  
        $ flask run
